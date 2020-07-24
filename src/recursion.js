@@ -38,10 +38,42 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+
+  //thought: when iterating through the input array, if the value found at array[i] is a number, can handle similarly to above function as a standard addition. If the value at array[i] is not a number, but another array, then will have to recursively call the arraySum function on that array
+
+  //create a variable counter
+  var sum = 0; //initialized at zero
+
+  //iterate through the input array
+  for (var i = 0; i < array.length; i++) {
+    //base case #1
+    if (array.length === 0) {
+      return 0;
+    } else if (typeof array[i] === 'number') { //base (intermediate?) case #2
+      sum += array[i];
+    } else { //recursive case on nested array
+      sum += arraySum(array[i]);
+    }
+  }
+  return sum;
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  //thought: since the tests do not allow use of modulus to decipher remainder value, could use Math.abs to calculate conditional possibilities
+  //Note: The pseudocode above threw an error when typing in "m o d u l o" as a comment string
+
+  var value = Math.abs(n);
+
+  if (value === 0) { //base case #1
+    return true;
+  } else if (value === 1) { //base case #2
+    return false;
+  } else if (value >= 2) {
+    return isEven(value - 2);
+  }
+
+
 };
 
 // 5. Sum all integers below a given integer.
